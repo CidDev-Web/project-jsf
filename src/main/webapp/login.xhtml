@@ -1,29 +1,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--  <h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet> -->
 </h:head>
 
 <h:body>
+	<div class="ui-fluid">
+		<h:form id="formLogin">
+			<p:growl id="growl" showDetail="true" sticky="true"></p:growl>
+			<p:panel id="pnllogin" header="Inicio de Sesion" style="text-align:center">
+				<p:graphicImage name="imgs/user.png" width="10%"/>
+				<p:panelGrid id="pnlGridLogin" columns="1"
+					columnClasses="ui-g-12 ui-md-12, ui-g-12 ui-md-12" layout="grid"
+					styleClass="ui-panelgrid-blank ui-fluid">
+					<p:outputLabel value="Usuario: " styleClass="colorText"
+						for="txtUsuario" style="float:left"></p:outputLabel>
+					<p:inputText id="txtUsuario" value="#{loginController.usuario}"
+						required="true" type="text"
+						requiredMessage="El campo usuario no puede dejarse en blanco"></p:inputText>
 
-	<h:form id="formLogin">
-		<h:panelGrid columns="2">
-			<h:outputLabel value="Usuario: " styleClass="colorText"></h:outputLabel>
-			<h:inputText id="txtUsuario" value="#{loginController.usuario}"
-				required="true"
-				requiredMessage="El campo usuario no puede dejarse en blanco"></h:inputText>
+					<p:outputLabel value="Contraseña: " styleClass="colorText"
+						for="txtPassword" style="float:left"></p:outputLabel>
+					<p:password id="txtPassword" value="#{loginController.password}"
+						required="true" toggleMask="true" redisplay="true"
+						requiredMessage="El campo contraseña no puede dejarse en blanco"></p:password>
+					<p></p>
+					<p:commandButton value="Entrar"
+						action="#{loginController.ingresar}" update="pnlGridLogin, growl"></p:commandButton>
+				</p:panelGrid>
+			</p:panel>
 
-			<h:outputLabel value="Contraseña: " styleClass="colorText"></h:outputLabel>
-			<h:inputSecret id="txtPassword" value="#{loginController.password}"
-				required="true"
-				requiredMessage="El campo contraseña no puede dejarse en blanco"></h:inputSecret>
-
-			<h:commandButton value="Entrar" action="#{loginController.ingresar}"></h:commandButton>
-		</h:panelGrid>
-	</h:form>
-
+		</h:form>
+	</div>
 </h:body>
 
 </html>
